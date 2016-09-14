@@ -14,6 +14,7 @@ import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
 
+
 public class DriveActivity extends Activity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
     /**
@@ -78,6 +79,13 @@ public class DriveActivity extends Activity implements GoogleApiClient.Connectio
                     if (resultCode == RESULT_OK) {
                         DriveId driveId = (DriveId) data.getParcelableExtra(
                                 OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+                       /* DriveFile file = Drive.DriveApi.getFile(mGoogleApiClient, driveId);
+
+                        DriveResource.MetadataResult mdRslt = file.getMetadata(mGoogleApiClient).await();
+                        if (mdRslt != null && mdRslt.getStatus().isSuccess()) {
+                            String link = mdRslt.getMetadata().getWebContentLink();
+                            Log.i("====LINK", "===" + link);
+                        }*/
                         showMessage("Selected file's ID: " + driveId);
                     }
                     finish();
