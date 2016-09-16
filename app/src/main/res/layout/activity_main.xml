@@ -3,12 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context="com.rbt.filepicker.MainActivity">
 
     <Button
+        android:id="@+id/driveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="Drive" />
+
+    <Button
+        android:id="@+id/dropBoxBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/driveBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="DropBox" />
+
+    <TextView
+        android:id="@+id/fileTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:onClick="onClick"
-        android:text="Drive" />
+        android:padding="15dp" />
+
+    <TextView
+        android:id="@+id/fileSizeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fileTV"
+        android:padding="15dp" />
 </RelativeLayout>
