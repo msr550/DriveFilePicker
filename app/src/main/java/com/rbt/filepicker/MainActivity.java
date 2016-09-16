@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dropbox.chooser.android.DbxChooser;
 
@@ -60,10 +62,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (resultCode == Activity.RESULT_OK) {
                 DbxChooser.Result result = new DbxChooser.Result(data);
                 Log.d("main", "Link to selected file: " + result.getLink());
-
-                showLink(fileTV, result.getLink());
-                fileSizeTV.setText(String.valueOf(result.getSize() / 1024) + " KB", TextView.BufferType.NORMAL);
-
+                if (result != null && result.getLink() != null) {
+                    String type = "";
+                    String extension = MimeTypeMap.getFileExtensionFromUrl(result.getLink().toString());
+                    if (extension != null) {
+                        type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+                        if (Constants.MIME_TYPE_RESUME.contains(type)) {
+                            Log.i("==Mime==", "====" + type);
+                            showLink(fileTV, result.getLink());
+                            fileSizeTV.setText(String.valueOf(result.getSize() / 1024) + " KB", TextView.BufferType.NORMAL);
+                        } else {
+                            Toast.makeText(this, "File not supported", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "File not supported", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "File not supported", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 // Failed or was cancelled by the user.
             }
